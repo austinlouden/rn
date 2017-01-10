@@ -1,41 +1,25 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 'use strict';
 
-var React = require('react');
-var ReactNative = require('react-native');
+import React, { Component } from 'react'
+import {
+  AppRegistry,
+  NavigatorIOS,
+} from 'react-native';
+
 var LandingPage = require('./LandingPage');
 
-var styles = ReactNative.StyleSheet.create({
-  text: {
-    color: 'black',
-    backgroundColor: 'white',
-    fontSize: 30,
-    margin: 80
-  },
-  container: {
-    flex: 1
-  }
-});
-
-class HelloWorld extends React.Component {
+export default class App extends Component {
   render() {
-    return <ReactNative.Text style={styles.text}>Hello World (Again)</ReactNative.Text>;
+    return (
+      <NavigatorIOS
+        style={{flex: 1}}
+        navigationBarHidden={true}
+        initialRoute={{
+          title: '',
+          component: LandingPage,
+        }}/>
+    );
   }
 }
 
-class Craft extends React.Component {
-  render() {
-    return <ReactNative.NavigatorIOS style={styles.container}
-    initialRoute={{
-      title: 'Craft',
-      component: HelloWorld,
-    }}/>
-
-  }
-}
-
-ReactNative.AppRegistry.registerComponent('drinks', function() { return LandingPage });
+AppRegistry.registerComponent('drinks', function() { return App });

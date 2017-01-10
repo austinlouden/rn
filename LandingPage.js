@@ -1,14 +1,16 @@
 'use strict';
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes} from 'react'
 import {
+  NavigatorIOS,
   StyleSheet,
   Text,
   TextInput,
-  View,
   TouchableHighlight,
-  ActivityIndicator,
+  View,
 } from 'react-native';
+
+var CategoryPage = require('./CategoryPage');
 
 var styles = StyleSheet.create({
   cellHeaderText: {
@@ -59,7 +61,7 @@ class LandingCell extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress={this._onPressButton}
+        onPress={this.props.onPress}
         underlayColor="#e5e5e5">
         <View>
           <View style={styles.line} />
@@ -78,13 +80,13 @@ class LandingCell extends Component {
       </TouchableHighlight>
     );
   }
-
-  _onPressButton() {
-
-  }
 }
 
 class LandingPage extends Component {
+  static propTypes = {
+    navigator: PropTypes.object.isRequired,
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -93,7 +95,7 @@ class LandingPage extends Component {
             style={styles.searchInput}
             placeholder='Search for a good drink...'/>
         </View>
-        <LandingCell
+        <LandingCell onPress={this.categoryPressed}
           headerText="Explore drinks by category"
           detailText="Gin, rum, vodka, whiskey, etc."/>
         <LandingCell
@@ -105,6 +107,12 @@ class LandingPage extends Component {
         <View style={styles.line} />
       </View>
     );
+  }
+
+  categoryPressed = () => {
+    this.props.navigator.push({
+      component: CategoryPage,
+    });
   }
 }
 
