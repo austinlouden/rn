@@ -11,24 +11,9 @@ import {
 } from 'react-native';
 
 var CategoryPage = require('./CategoryPage');
+var globalStyles = require('./styles.js');
 
 const styles = StyleSheet.create({
-  cellHeaderText: {
-    marginTop: 16,
-    marginRight: 64,
-    fontSize: 32,
-    lineHeight: 35,
-    textAlign: 'left',
-    fontFamily: 'IowanOldStyle-Bold',
-    color: '#555'
-  },
-  cellDescriptionText: {
-    marginBottom: 16,
-    fontSize: 16,
-    textAlign: 'left',
-    fontFamily: 'Iowan Old Style',
-    color: '#555'
-  },
   container: {
     padding: 20,
     marginTop: 16,
@@ -50,11 +35,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     color: '#555'
   },
-  line: {
-    flexGrow: 1,
-    height: 0.5,
-    backgroundColor: '#e5e5e5'
-  },
 });
 
 class LandingCell extends Component {
@@ -64,13 +44,13 @@ class LandingCell extends Component {
         onPress={this.props.onPress}
         underlayColor="#e5e5e5">
         <View>
-          <View style={styles.line} />
+          <View style={globalStyles.separatorLine} />
           <View style={styles.flowRight}>
             <View>
-              <Text style={styles.cellHeaderText}>
+              <Text style={globalStyles.largeCellHeaderText}>
                 {this.props.headerText}
               </Text>
-              <Text style={styles.cellDescriptionText}>
+              <Text style={globalStyles.largeCellDescriptionText}>
                 {this.props.detailText}
               </Text>
             </View>
@@ -95,7 +75,7 @@ class LandingPage extends Component {
             style={styles.searchInput}
             placeholder='Search for a good drink...'/>
         </View>
-        <LandingCell onPress={this.categoryPressed}
+        <LandingCell onPress={this._handleCategoryPress}
           headerText="Explore drinks by category"
           detailText="Gin, rum, vodka, whiskey, etc."/>
         <LandingCell
@@ -109,7 +89,7 @@ class LandingPage extends Component {
     );
   }
 
-  categoryPressed = () => {
+  _handleCategoryPress = () => {
     this.props.navigator.push({
       component: CategoryPage,
     });

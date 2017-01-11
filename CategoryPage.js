@@ -5,10 +5,13 @@ import {
   ListView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
 import categoryData from './data/categoryData'
+
+var globalStyles = require('./styles.js');
 
 const styles = StyleSheet.create({
   container: {
@@ -29,12 +32,22 @@ class CategoryPage extends Component {
 
   render() {
     return (
-      <ListView
-        style={styles.container}
-        dataSource={this.state.dataSource}
-        renderRow={(categoryData) => <CategoryCell {...categoryData}/>}
-      />
+      <View style={styles.container}>
+      <TouchableHighlight
+        onPress={this._handleBackPress}
+        underlayColor="#e5e5e5">
+          <Text>x</Text>
+        </TouchableHighlight>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(categoryData) => <CategoryCell {...categoryData}/>}
+        />
+      </View>
     );
+  }
+
+  _handleBackPress = () => {
+    this.props.navigator.pop();
   }
 }
 
@@ -42,12 +55,16 @@ const cellStyles = StyleSheet.create({
   container: {
     flex: 1
   },
+
 });
 
 const CategoryCell = (props) => (
   <View style={cellStyles.container}>
-    <Text style={styles.text}>
-      {`${props.category} ${props.description}`}
+    <Text style={globalStyles.largeCellHeaderText}>
+      {`${props.category}`}
+    </Text>
+    <Text style={globalStyles.largeCellDescriptionText}>
+      {`${props.description}`}
     </Text>
   </View>
 );
