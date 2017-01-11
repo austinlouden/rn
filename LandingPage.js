@@ -12,7 +12,7 @@ import {
 
 var CategoryPage = require('./CategoryPage');
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   cellHeaderText: {
     marginTop: 16,
     marginRight: 64,
@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
   },
   cellDescriptionText: {
     marginBottom: 16,
-    fontSize: 12,
+    fontSize: 16,
     textAlign: 'left',
     fontFamily: 'Iowan Old Style',
     color: '#555'
